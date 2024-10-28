@@ -1,0 +1,12 @@
+
+<?xml version='1.0' encoding='UTF-8' ?>
+
+
+<odoo>
+    <menuitem id="mdm_module_root" name="Android MDM" sequence="0"/>
+
+    <menuitem id="menu_mdm_policy" name="Policies" parent="menu_mdm_root" action="mdm_policy_action"/>
+    <menuitem id="menu_mdm_app" name="Applications" parent="menu_mdm_root" action="mdm_app_action"/>
+    <menuitem id="menu_mdm_app" name="Applications" parent="menu_mdm_root" action="mdm_app_action"/>
+
+</odoo>

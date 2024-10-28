@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_device_user,mdm.device_user,model_mdm_device,,1,1,1,1
+access_mdm_device_manager,mdm.device manager,model_mdm_device,,1,1,1,1
+

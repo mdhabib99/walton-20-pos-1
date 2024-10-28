@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+
+        <!-- Replace Address -->
+        <xpath expr="//t/t[@t-set='address']" position='replace'>
+        </xpath>
+
+        <!-- Replace forced vat -->
+        <xpath expr="//t/t[@t-set='forced_vat']" position='replace'>
+        </xpath>
+
+        <!-- Remove old informations -->
+        <xpath expr="//t/div[hasclass('page')]/div[@id='informations']" position='replace'></xpath>
+
+        <!-- Restyle Report Type -->
+        <xpath expr="//t/div[hasclass('page')]/h2" position="replace">
+        </xpath>
+
+        <!-- Hide Payment Terms -->
+        <xpath expr="//t/div[hasclass('page')]/div[last()]" position="replace">
+        </xpath>
+
+        <!-- Replace Signature Section -->
+        <xpath expr="//t/div[hasclass('page')]/div[@name='signature']" position="replace">
+        </xpath>
+
+        <!-- Injecting new contents before table -->
+        <xpath expr="//t/div[hasclass('page')]/div" position="after">
+            <h2 class="text-center fw-bold text-warning">
+                <span t-if="env.context.get('proforma', False) or is_pro_forma">
+                    <u>Pro-Forma Invoice</u>
+                </span>
+                <span t-elif="doc.state in ['draft','sent']">
+                    <u>QUOTATION</u>
+                </span>
+                <span t-else="">
+                    <u>Order</u>
+                </span>
+            </h2>
+            <!-- 1st Row -->
+            <div class="gbd_box">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Customer ID:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.customer_id"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Quotation No:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Quotation Date:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.date_order"
+                                      t-options='{"widget": "date"}'/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Expiry Date:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.validity_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 2nd Row -->
+            <div class="gbd_box">
+                <div class="gbd-fill">
+                    <div class="row m-0 p-0">
+                        <div class="col-6 m-0 gbd_fill_row">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                            CUSTOMER
+                        </div>
+                        <div class="col-6 m-0 gbd_fill_row">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                            SUPPLIER
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Company Name:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Contact Name:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Email:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.email"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Mobile:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.mobile"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Phone:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.phone"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Reg. Address:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_shipping_id"
+                                      t-options='{"widget": "contact", "fields": ["address",], "no_marker": True, "phone_icons": False}'/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Company Name:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.company_id"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Contact Name:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.user_id"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Email:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.user_id.email"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Mobile:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.user_id.mobile"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Phone:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.user_id.phone"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Reg. Address:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.company_id.company_details"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 3rd Row -->
+            <div class="gbd_box">
+                <div class="gbd-fill">
+                    <div class="row m-0 p-0">
+                        <div class="col-6 m-0 gbd_fill_row">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            BASIC INFORMATION
+                        </div>
+                        <div class="col-6 m-0 gbd_fill_row">
+                            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                            SUPPLIER BANK INFORMATION
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Brand:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.brand_name"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Product Origin:</div>
+                            <div class="col-auto gbd-small">
+                                <span>Bangladesh</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Spare Parts:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.spare_parts"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Marketing Budget:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-field="doc.partner_id.budget"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 gbd-small-bold">Warranty Terms &amp; Conditions:</div>
+                            <div class="col-auto gbd-small pe-3">
+                                <div class="row border border-1">
+                                    <div class="col-7"><i class="fa fa-angle-right px-2"></i>Product Warranty/DOA:
+                                    </div>
+                                    <div class="col-auto">
+                                        <span t-field="doc.partner_id.doa"/>
+                                    </div>
+                                </div>
+                                <div class="row border border-1">
+                                    <div class="col-7"><i class="fa fa-angle-right px-2"></i>Major Parts:
+                                    </div>
+                                    <div class="col-auto">
+                                        <span
+                                                t-field="doc.partner_id.major_parts"/>
+                                    </div>
+                                </div>
+                                <div class="row border border-1">
+                                    <div class="col-7"><i class="fa fa-angle-right px-2"></i>Minor Parts:
+                                    </div>
+                                    <div class="col-auto">
+                                        <span
+                                                t-field="doc.partner_id.minor_parts"/>
+                                    </div>
+                                </div>
+                                <div class="row border border-1">
+                                    <div class="col-7"><i class="fa fa-angle-right px-2"></i>Service Charge:
+                                    </div>
+                                    <div class="col-auto">
+                                        <span
+                                                t-field="doc.partner_id.service_charge"/>
+                                    </div>
+                                </div>
+                                <div class="row border border-1">
+                                    <div class="col-7"><i class="fa fa-angle-right px-2"></i>Transportation Cost:
+                                    </div>
+                                    <div class="col-auto">
+                                        <span
+                                                t-field="doc.partner_id.transportation_cost"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <t t-if="doc.company_id.bank_ids">
+                            <t t-set="sbank" t-value="doc.company_id.bank_ids[0]"/>
+                            <div class="row">
+                                <div class="col-4 gbd-small-bold">Bank Name:</div>
+                                <div class="col-auto gbd-small">
+                                    <span t-esc="sbank.bank_name"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 gbd-small-bold">Bank Address:</div>
+                                <div class="col-auto gbd-small">
+                                    <span t-esc="sbank.address"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 gbd-small-bold">Contact Mail:</div>
+                                <div class="col-auto gbd-small">
+                                    <span t-esc="sbank.email_id"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 gbd-small-bold">Contact Phone:</div>
+                                <div class="col-auto gbd-small">
+                                    <span t-esc="sbank.contact"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 gbd-small-bold">A/C Name:</div>
+                                <div class="col-auto gbd-small">
+                                    <span t-esc="sbank.acc_holder_name"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 gbd-small-bold">A/C No:</div>
+                                <div class="col-auto gbd-small">
+                                    <span t-esc="sbank.acc_number"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 gbd-small-bold">Swift Code:</div>
+                                <div class="col-auto gbd-small">
+                                    <span t-esc="sbank.swift_code"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 gbd-small-bold">Other Info/Payment Guidelines:</div>
+                                <div class="col-auto gbd-small">
+                                    <span t-esc="sbank.comments"/>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Injecting new contents for table -->
+        <xpath expr="//t/div[hasclass('page')]/table" position="replace">
+            <table class="table table-sm o_main_table table-borderless mt-4">
+                <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                <thead style="display: table-row-group">
+                    <tr>
+                        <th name="th_sn" class="text-start">SN</th>
+                        <th name="th_item_code" class="text-start">Item Code</th>
+                        <th name="th_description" class="text-start">Description</th>
+                        <th name="th_hsn_code" class="text-start">HS Code</th>
+                        <th name="th_uom" class="text-start">UoM</th>
+                        <th name="th_quantity" class="text-end">Qty</th>
+                        <th name="th_priceunit" class="text-end">Unit Price</th>
+                        <th name="th_total_value" class="text-end">Total Value</th>
+                        <th name="th_l_quantity" class="text-end">L. Qty</th>
+                        <th name="th_cont_#" class="text-end">Cont. #</th>
+                        <th name="th_cont_type" class="text-end">Cont. Type</th>
+                    </tr>
+                </thead>
+                <tbody class="sale_tbody">
+
+                    <t t-set="current_subtotal" t-value="0"/>
+
+                    <t t-foreach="lines_to_report" t-as="line">
+
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                           groups="account.group_show_line_subtotals_tax_excluded"/>
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                           groups="account.group_show_line_subtotals_tax_included"/>
+
+                        <tr
+                                t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                            <t t-if="not line.display_type">
+                                <td>
+                                    <span t-esc="(line_index + 1)"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.product_id.item_code"/>
+                                </td>
+                                <td name="td_name">
+                                    <span t-field="line.name"/>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="line.product_id.hscode_id"/>
+                                </td>
+                                <td name="td_uom" class="text-end">
+                                    <span t-field="line.product_uom"/>
+                                </td>
+                                <td name="td_quantity" class="text-end">
+                                    <span t-field="line.product_uom_qty"/>
+                                </td>
+                                <td name="td_priceunit" class="text-end">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <td class="text-end">
+                                    <span t-esc="line.product_uom_qty * line.price_unit"/>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="line.loading_qty"/>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="line.container_qty"/>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="line.container_type"/>
+                                </td>
+                                <td t-if="display_discount" class="text-end">
+                                    <span t-field="line.discount"/>
+                                </td>
+                            </t>
+                            <t t-elif="line.display_type == 'line_section'">
+                                <td name="td_section_line" colspan="99">
+                                    <span t-field="line.name"/>
+                                </td>
+                                <t t-set="current_section" t-value="line"/>
+                                <t t-set="current_subtotal" t-value="0"/>
+                            </t>
+                            <t t-elif="line.display_type == 'line_note'">
+                                <td name="td_note_line" colspan="99">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </t>
+                        </tr>
+
+                        <t
+                                t-if="current_section and (line_last or doc.order_line[line_index+1].display_type == 'line_section') and not line.is_downpayment">
+                            <tr class="is-subtotal text-end">
+                                <td name="td_section_subtotal" colspan="99">
+                                    <strong class="mr16">Subtotal</strong>
+                                    <span
+                                            t-out="current_subtotal"
+                                            t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+                                    />
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+        </xpath>
+
+        <!-- Inject Texual Repr of the Subtotal Amount, Shipment information & Notes-->
+        <xpath expr="//t/div[hasclass('page')]/div[hasclass('clearfix')]" position="after">
+            <figure>
+                <blockquote>
+                    <p>In Words:
+                        <span t-out="doc.company_id.currency_id.amount_to_text(current_subtotal)"/>
+                    </p>
+                </blockquote>
+            </figure>
+
+            <!-- shipment information -->
+            <div
+                    class="gbd_box">
+                <div class="gbd-fill">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="m-0 gbd_fill_row">
+                                <i class="fa fa-vcard-o" aria-hidden="true"></i>
+                                SHIPTMENT INFORMATION
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Shipment Mode:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.partner_id.shipment_mode" t-out="doc.partner_id.shipment_mode"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Shipment Terms:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.partner_id.inco_term" t-out="doc.partner_id.inco_term"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Shipment Date:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.commitment_date" t-out="doc.commitment_date"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Port of Loading:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.partner_id.loading_port" t-out="doc.partner_id.loading_port"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Port of Discharge:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.partner_id.discharge_port" t-out="doc.partner_id.discharge_port"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Payment Currency:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.partner_id.currency_type"
+                                      t-out="doc.partner_id.currency_type.upper()"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Payment Terms:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.partner_id.payment_term" t-out="doc.partner_id.payment_term"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Payment Type:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.partner_id.payment_type"
+                                      t-out="', '.join(doc.partner_id.payment_type.mapped('name'))"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Trans &amp; Partial Shipment:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.partner_id.tran_partial_shipment"
+                                      t-out="doc.partner_id.tran_partial_shipment.title()"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 gbd-small-bold">Tolerance:</div>
+                            <div class="col-auto gbd-small">
+                                <span t-if="doc.partner_id.tolerance" t-out="doc.partner_id.tolerance"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Notes Section -->
+            <div class="gbd_box">
+                <div class="gbd-fill">
+                    <div class="row m-0 p-0">
+                        <div class="col-12 m-0 gbd_fill_row">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            Notes(Internal)
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div>
+                            <p t-field="doc.note" name="order_note"/>
+                        </div>
+                    </div>
+                </div>
+                <t t-if="false">
+                    <div class="gbd-fill">
+                        <div class="col-12 m-0 gbd_fill_row">
+                            <i class="fa fa-tasks" aria-hidden="true"></i>
+                            Terms &amp; Conditions
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                        </div>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Self declaration line -->
+            <div class="gbd_box mt-4">
+                <p>I declare that the information mention above is true and correct to the best of my
+                    knowledge.
+                </p>
+            </div>
+
+            <!-- signature section -->
+            <div class="gbd_box mt-5">
+                <div class="row">
+                    <div class="col-6">
+                        <div t-if="doc.signature" class="mt-4" name="signature">
+                            <div>
+                                <strong>Signature</strong>
+                            </div>
+                            <div>
+                                <img t-att-src="image_data_uri(doc.signature)"
+                                     style="max-height: 4cm; max-width: 8cm;"/>
+                            </div>
+                            <div>
+                                <p t-field="doc.signed_by"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-end">
+                        <div t-if="doc.signature" class="mt-4 ml64 mr4" name="signature">
+                            <div class="offset-8">
+                                <strong>Signature</strong>
+                            </div>
+                            <div class="offset-8 text-start">
+                                <img t-att-src="image_data_uri(doc.signature)"
+                                     style="max-height: 4cm; max-width: 8cm;"/>
+                            </div>
+                            <div class="offset-8 text-end">
+                                <p t-field="doc.signed_by"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

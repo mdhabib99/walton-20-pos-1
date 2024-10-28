@@ -1,0 +1,20 @@
+{
+    'name': 'GBD Contacts',
+    'description': 'WALTON GB Customized Contacts',
+    'summary': 'A custom module for WALTON GB to meet their requirements for contacts',
+    'version': '16.0.1.0.0',
+    'category': 'Contacts',
+    'author': 'K. M. JIAUL ISLAM',
+    'maintainer': 'WALTON DIGI-TECH INDUSTRIES LTD.',
+    'website': 'https://www.waltondigitech.com/',
+    'depends': ['base', 'contacts'],
+    'data': [
+        'views/res_partner_form.xml',
+        'views/res_bank_views.xml',
+        'security/ir.model.access.csv',
+    ],
+    'license': 'LGPL-3',
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}

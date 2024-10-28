@@ -1,0 +1,17 @@
+<odoo>
+    <record id="mdm_policy_action" model="ir.actions.act_window">
+        <field name="name">Policies</field>
+        <field name="res_model">mdm.policy</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+    <record id="mdm_app_action" model="ir.actions.act_window">
+    <field name="name">MDM Applications</field>
+    <field name="res_model">mdm.app</field>  <!-- Replace with your model name -->
+    <field name="view_mode">tree,form</field>
+
+</record>
+</odoo>

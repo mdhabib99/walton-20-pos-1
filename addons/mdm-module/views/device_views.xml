@@ -1,0 +1,47 @@
+<odoo>
+    <!-- List view to display all registered devices -->
+    <record id="view_mdm_device_list" model="ir.ui.view">
+        <field name="name">mdm.device.list</field>
+        <field name="model">mdm.device</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/> <!-- Device name -->
+                <field name="serial_number"/> <!-- Serial number -->
+                <field name="user_id"/> <!-- Assigned user -->
+                <field name="status"/> <!-- Device status -->
+                <field name="last_check_in"/> <!-- Last check-in time -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view to edit device details -->
+    <record id="view_mdm_device_form" model="ir.ui.view">
+        <field name="name">mdm.device.form</field>
+        <field name="model">mdm.device</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/> <!-- Device name -->
+                        <field name="serial_number"/> <!-- Serial number -->
+                        <field name="user_id"/> <!-- Assigned user -->
+                        <field name="status"/> <!-- Device status -->
+                        <field name="battery_level"/> <!-- Battery level -->
+                        <field name="location"/> <!-- Location -->
+                    </group>
+                    <group>
+                        <field name="policy_password_required"/> <!-- Password policy -->
+                        <field name="policy_encryption"/> <!-- Encryption policy -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+    <menuitem id="menu_device_management" name="Device Management" parent="base.menu_custom" sequence="10"/>
+
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_mdm_policy_list" model="ir.ui.view">
+        <field name="name">mdm.policy.list</field>
+        <field name="model">mdm.policy</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mdm_policy_form" model="ir.ui.view">
+        <field name="name">mdm.policy.form</field>
+        <field name="model">mdm.policy</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

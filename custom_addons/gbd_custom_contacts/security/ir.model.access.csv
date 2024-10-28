@@ -1,0 +1,9 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_gbd_business_type_lov,access_gbd_business_type_lov,model_gbd_business_type_lov,base.group_user,1,1,1,1
+access_gbd_shipment_mode_lov,access_gbd_shipment_mode_lov,model_gbd_shipment_mode_lov,base.group_user,1,1,1,1
+access_gbd_landing_port_lov,access_gbd_landing_port_lov,model_gbd_landing_port_lov,base.group_user,1,1,1,1
+access_gbd_discharge_port_lov,access_gbd_discharge_port_lov,model_gbd_discharge_port_lov,base.group_user,1,1,1,1
+access_gbd_incoterm_lov,access_gbd_incoterm_lov,model_gbd_incoterm_lov,base.group_user,1,1,1,1
+access_gbd_payment_type_lov,access_gbd_payment_type_lov,model_gbd_payment_type_lov,base.group_user,1,1,1,1
+access_gbd_payment_term_lov,access_gbd_payment_term_lov,model_gbd_payment_term_lov,base.group_user,1,1,1,1
+access_gbd_contact_agreement,access_gbd_contact_agreement,model_gbd_contact_agreement,base.group_user,1,1,1,1

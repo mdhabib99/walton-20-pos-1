@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_order_form_gbd_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath
+                    expr="//form[hasclass('o_sale_order')]/sheet/notebook/page[@name='order_lines']/field/tree/field[@name='tax_id']"
+                    position="before">
+                <field name="loading_qty"/>
+                <field name="container_qty"/>
+                <field name="container_type"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

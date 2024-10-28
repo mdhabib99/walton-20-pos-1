@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_bank_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.bank.form.inherit</field>
+            <field name="model">res.partner.bank</field>
+            <field name="priority">16</field>
+            <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='allow_out_payment']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='bank_id']" position="attributes">
+                    <attribute name="string">Bank Name</attribute>
+                </xpath>
+                <xpath expr="//field[@name='acc_holder_name']" position="after">
+                    <field name='swift_code'/>
+                    <field name='contact'/>
+                    <field name='email_id' widget="email"/>
+                    <field name='address'/>
+                </xpath>
+                <xpath expr="//field[@name='acc_holder_name']" position="attributes">
+                    <attribute name='string'>Account Name</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name='comments'/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_bank_tree_inherit" model="ir.ui.view">
+            <field name="name">res.partner.bank.tree.inherit</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='allow_out_payment']" position="attributes">
+                    <field name="invisible">1</field>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_bank_tree_inherit" model="ir.ui.view">
+            <field name="name">res.partner.bank.tree.inherit</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='allow_out_payment']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

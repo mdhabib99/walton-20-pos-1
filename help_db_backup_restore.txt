@@ -1,0 +1,8 @@
+# For DB Backup Run Below Command
+
+pg_dump -h localhost -p 5432 -U waltonpos -F t -d bbpos -f ./waltonpos_backup.dump
+
+
+# For DB Restore Run Below Command
+
+pg_restore -h localhost -p 5432 -U waltonpos -d waltonpos -v ./bbpos3.dump
