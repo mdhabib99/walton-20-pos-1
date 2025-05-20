@@ -1,4 +1,4 @@
-## Walton POS ERP
+## Walton POS ERP-1
 
 WaltonPOS ERP is a suite of web based business apps.
 
